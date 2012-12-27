@@ -18,13 +18,15 @@ if(!empty($_SESSION['loggedIn']) && !empty($_SESSION['user']))
 }
 elseif(!empty($_POST['lUser']) && !empty($_POST['lPass']))
 {
-	$username = mysql_real_escape_string($_POST['lUser']);
-    $password = hash('sha256', mysql_real_escape_string($_POST['lPass']));
+	$username = mysqli_real_escape_string($conn, $_POST['lUser']);
+    $password = hash('sha256', mysqli_real_escape_string($conn, $_POST['lPass']));
     
 	$checkLogin = mysqli_query($conn, "SELECT * FROM admin WHERE user = '".$username."' LIMIT 1");
-	$check = mysqli_fetch_assoc($checkLogin);
-    $salt = substr($check['hash'], 0, 64);
+	$check = mysqli_fetch_array($checkLogin);
+	$salt = substr($check['hash'], 0, 64);
 	$tryPass = $salt . hash('sha256', $salt . $password);
+		
+	echo "<p>" . $check['hash'] . "<br />" . $tryPass . "</p>\n";
 	
     if($check['hash'] == $tryPass)
     {        

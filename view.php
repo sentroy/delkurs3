@@ -17,6 +17,8 @@ if($result['warned'] == 1)
 {
 	if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == 1)
 	{
+		$warnMessage = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM warnings WHERE wID = '" . $result['uID'] . "'"));
+		echo '<div style="background:#ffcccc; height:32px; line-height:32px; padding:0 10px;">' . $warnMessage['warning'] . "</div>\n";
 		echo '<a href="?p=review&review='. $result['uID'] .'&ax=clear" style="display:inline-block; height:32px;"><img border="0" src="img/allow.png" alt="CLEAR WARNINGS" />(Clear warnings)</a><a href="?p=review&review='. $result['uID'] .'&ax=delete&n='. $result['file'] .'" style="display:inline-block; float:right; height:32px;">(Delete image)<img border="0" src="img/deny.png" alt="DELETE IMAGE" /></a>';
 	}
 	else

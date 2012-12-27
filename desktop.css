@@ -48,9 +48,9 @@ html, body {
 	text-shadow: 0 0 5px #000;
 }
 
-#title {
+#title span {
 	color:white;
-	font-family:script;
+	font-family: script;
 	font-size:40px;
 	text-shadow:0 0 5px #000;
 }

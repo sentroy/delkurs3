@@ -30,6 +30,7 @@ if(isset($_SESSION['loggedIn']) && isset($_SESSION['user']))
 						if(file_exists($fil) && !is_dir($fil)) unlink($fil);
 					}
 					closedir($dh);
+					header('Location: index.php');
 				}
 			}
 			else
